@@ -1,0 +1,17 @@
+# Allow ARP Protocol (ARP is converted to unicast transparently by ZeroTier)
+accept
+	ethertype arp
+;
+# Allow TCP Packets to service (Allows TCP connections ONLY to service with this port)
+accept 
+	ipprotocol tcp
+		and ipdest IP_HERE/32
+		and dport 25565
+;
+# Allow TCP Packets from service (Allows TCP connections ONLY from service with this port)
+accept
+	ipprotocol tcp
+		and ipsrc IP_HERE/32
+		and sport 25565
+;
+# Default drop everything else
